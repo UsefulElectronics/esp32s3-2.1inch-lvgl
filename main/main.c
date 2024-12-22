@@ -26,7 +26,7 @@
 #include "hardware/hlk-ld1125h.h"
 
 #include "display/display.h"
-#include "display/gc9a01.h"
+
 #include "display/lvgl_demo_ui.h"
 #include "display/ui_helpers.h"
 
@@ -130,7 +130,7 @@ void app_main(void)
 
 	xTaskCreatePinnedToCore(encoder_handler_task, "encoder_handler", 10000, NULL, 4, NULL, 1);
 
-//     xTaskCreatePinnedToCore(lvgl_time_task, "lvgl_time_task", 10000, NULL, 4, NULL, 1);
+    xTaskCreatePinnedToCore(lvgl_time_task, "lvgl_time_task", 10000, NULL, 4, NULL, 1);
 
      //Wait for WiFi and MQTT broker connection to be established.
 //     vTaskDelay(pdMS_TO_TICKS(15000));

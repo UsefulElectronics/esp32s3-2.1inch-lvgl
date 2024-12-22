@@ -120,9 +120,11 @@ void encoder_handler_task(void *param)
 void encoder_init(void* callback)
 {
     ESP_LOGI(encoder, "install pcnt unit");
-    pcnt_unit_config_t unit_config = {
+    pcnt_unit_config_t unit_config = 
+    {
         .high_limit = EXAMPLE_PCNT_HIGH_LIMIT,
         .low_limit = EXAMPLE_PCNT_LOW_LIMIT,
+
     };
 
 //    gpio_config_t knob_button_config = {
@@ -141,7 +143,8 @@ void encoder_init(void* callback)
     ESP_ERROR_CHECK(pcnt_unit_set_glitch_filter(pcnt_unit, &filter_config));
 
     ESP_LOGI(encoder, "install pcnt channels");
-    pcnt_chan_config_t chan_a_config = {
+    pcnt_chan_config_t chan_a_config = 
+    {
         .edge_gpio_num = EXAMPLE_EC11_GPIO_A,
         .level_gpio_num = EXAMPLE_EC11_GPIO_B,
     };
@@ -167,10 +170,11 @@ void encoder_init(void* callback)
 
 //    memcpy(hEncoder.whatchPoints, watch_points, sizeof(watch_points));
 
-    for (size_t i = 0; i < sizeof(watch_points) / sizeof(watch_points[0]); i++) {
-        ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, watch_points[i]));
-    }
-    pcnt_event_callbacks_t cbs = {
+//    for (size_t i = 0; i < sizeof(watch_points) / sizeof(watch_points[0]); i++) {
+//        ESP_ERROR_CHECK(pcnt_unit_add_watch_point(pcnt_unit, watch_points[i]));
+//    }
+    pcnt_event_callbacks_t cbs = 
+    {
         .on_reach = pcnt_on_reach,
     };
     hEncoder.queue = xQueueCreate(10, sizeof(int));

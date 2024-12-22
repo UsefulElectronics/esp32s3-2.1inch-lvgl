@@ -4,41 +4,45 @@
  ******************************************************************************/
 /**
  ******************************************************************************
- * @file    :  display.h
+ * @file    :  gc9503cv.h
  * @author  :  WARD ALMASARANI
  * @version :  v.1.0
- * @date    :  Feb 1, 2023
+ * @date    :  Dec 20, 2024
  * @link    :  https://www.youtube.com/@usefulelectronics
  *			   Hold Ctrl button and click on the link to be directed to
 			   Useful Electronics YouTube channel	
  ******************************************************************************/
 
-#ifndef MAIN_DISPLAY_H_
-#define MAIN_DISPLAY_H_
+#ifndef MAIN_DISPLAY_GC9503CV_H_
+#define MAIN_DISPLAY_GC9503CV_H_
 
 
 /* INCLUDES ------------------------------------------------------------------*/
-
-
-#include "esp_err.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_lcd_panel_io.h"
+#include "esp_lcd_panel_ops.h"
+#include "esp_lcd_panel_vendor.h"
+#include "esp_lcd_panel_rgb.h"
 #include "esp_log.h"
-#include "lvgl.h"
-#include "display/gc9503cv.h"
+
+#include "sdkconfig.h"
+#include "../priv_include/bsp_err_check.h"
+#include "../priv_include/bsp_sub_board.h"
 #include "bsp/esp-bsp.h"
-#include "esp_timer.h"
-//#include "lv_example_pub.h"
 /* MACROS --------------------------------------------------------------------*/
-#define EXAMPLE_LVGL_TICK_PERIOD_MS    2
+
 /* ENUMORATIONS --------------------------------------------------------------*/
 
 /* STRUCTURES & TYPEDEFS -----------------------------------------------------*/
 
 /* VARIABLES -----------------------------------------------------------------*/
-extern lv_disp_drv_t disp_drv;
+extern esp_lcd_panel_handle_t panel_handle;
 /* FUNCTIONS DECLARATION -----------------------------------------------------*/
-bool display_notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_io_event_data_t *edata, void *user_ctx);
+esp_lcd_panel_handle_t gc9503cv_lcd_init(void *arg);
 
-void displayConfig(void);
-#endif /* MAIN_DISPLAY_H_ */
+
+#endif /* MAIN_DISPLAY_GC9503CV_H_ */
 
 /*************************************** USEFUL ELECTRONICS*****END OF FILE****/

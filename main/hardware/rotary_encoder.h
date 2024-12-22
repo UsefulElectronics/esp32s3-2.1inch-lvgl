@@ -29,12 +29,12 @@
 
 #define ENCODER_MAX_WHATCHPIONT_COINT 100
 
-#define EXAMPLE_PCNT_HIGH_LIMIT 50
-#define EXAMPLE_PCNT_LOW_LIMIT  -50
+#define EXAMPLE_PCNT_HIGH_LIMIT 5000
+#define EXAMPLE_PCNT_LOW_LIMIT  -5000
 
-#define EXAMPLE_EC11_GPIO_A 9
-#define EXAMPLE_EC11_GPIO_B 10
-#define KNOB_BUTTON 6//13
+#define EXAMPLE_EC11_GPIO_A 5
+#define EXAMPLE_EC11_GPIO_B 6
+#define KNOB_BUTTON 0//13
 /* ENUMORATIONS --------------------------------------------------------------*/
 
 /* STRUCTURES & TYPEDEFS -----------------------------------------------------*/
