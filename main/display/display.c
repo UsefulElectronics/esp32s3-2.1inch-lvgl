@@ -34,6 +34,10 @@ static void *lvgl_port_flush_next_buf = NULL;
 #endif
 /* PRIVATE FUNCTIONS DECLARATION ---------------------------------------------*/
 extern void example_lvgl_demo_ui(lv_disp_t *disp);
+static bool lvgl_port_lcd_trans_done(esp_lcd_panel_handle_t handle);
+static void example_lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t *color_map);
+static void example_lvgl_port_update_callback(lv_disp_drv_t *drv);
+static void example_increase_lvgl_tick(void *arg);
 /* FUNCTION PROTOTYPES -------------------------------------------------------*/
 
 
@@ -57,9 +61,28 @@ static void example_lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_
     lvgl_port_flush_next_buf = color_map;
     // copy a buffer's content to a specific area of the display
     esp_lcd_panel_draw_bitmap(panel_handle, offsetx1, offsety1, offsetx2 + 1, offsety2 + 1, color_map);
-    
+    lvgl_port_rgb_next_buf = color_map;
+
     lv_disp_flush_ready(drv);
 }
+
+
+#if CONFIG_BSP_DISPLAY_LVGL_AVOID_TEAR
+static bool lvgl_port_lcd_trans_done(esp_lcd_panel_handle_t handle)
+{
+    BaseType_t need_yield = pdFALSE;
+#if CONFIG_BSP_DISPLAY_LVGL_FULL_REFRESH && CONFIG_BSP_LCD_RGB_BUFFER_NUMS == 3
+    if (lvgl_port_rgb_next_buf != lvgl_port_rgb_last_buf) 
+    {
+        lvgl_port_flush_next_buf = lvgl_port_rgb_last_buf;
+        lvgl_port_rgb_last_buf = lvgl_port_rgb_next_buf;
+    }
+#else
+   // xTaskNotifyFromISR(lvgl_task_handle, ULONG_MAX, eNoAction, &need_yield);
+#endif
+    return (need_yield == pdTRUE);
+}
+#endif
 
 /* Rotate display and touch, when rotated screen in LVGL. Called when driver parameters are updated. */
 static void example_lvgl_port_update_callback(lv_disp_drv_t *drv)
@@ -158,6 +181,10 @@ void displayConfig(void)
         .callback = &example_increase_lvgl_tick,
         .name = "lvgl_tick"
     };
+    
+    #if CONFIG_BSP_DISPLAY_LVGL_AVOID_TEAR
+    bsp_lcd_register_trans_done_callback(lvgl_port_lcd_trans_done);
+	#endif
 
     esp_timer_handle_t lvgl_tick_timer = NULL;
     ESP_ERROR_CHECK(esp_timer_create(&lvgl_tick_timer_args, &lvgl_tick_timer));

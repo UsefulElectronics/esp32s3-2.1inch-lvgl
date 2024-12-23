@@ -28,7 +28,7 @@
 #include "esp_timer.h"
 //#include "lv_example_pub.h"
 /* MACROS --------------------------------------------------------------------*/
-#define EXAMPLE_LVGL_TICK_PERIOD_MS    2
+#define EXAMPLE_LVGL_TICK_PERIOD_MS    5
 /* ENUMORATIONS --------------------------------------------------------------*/
 
 /* STRUCTURES & TYPEDEFS -----------------------------------------------------*/
