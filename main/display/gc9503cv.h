@@ -32,7 +32,26 @@
 #include "../priv_include/bsp_sub_board.h"
 #include "bsp/esp-bsp.h"
 /* MACROS --------------------------------------------------------------------*/
+/* LCD related parameters */
+#define BSP_LCD_H_RES                   (480)
+#define BSP_LCD_V_RES                   (480)
+#define BSP_LCD_PIXEL_CLOCK_HZ          (10 * 1000 * 1000)
+#define BSP_LCD_HSYNC_BACK_PORCH        (20)
+#define BSP_LCD_HSYNC_FRONT_PORCH       (40)
+#define BSP_LCD_HSYNC_PULSE_WIDTH       (8)
+#define BSP_LCD_VSYNC_BACK_PORCH        (20)
+#define BSP_LCD_VSYNC_FRONT_PORCH       (50)
+#define BSP_LCD_VSYNC_PULSE_WIDTH       (8)
+#define BSP_LCD_PCLK_ACTIVE_NEG         (false)
 
+/* LVGL related parameters */
+#define LVGL_TICK_PERIOD_MS         (CONFIG_BSP_DISPLAY_LVGL_TICK)
+#define LVGL_BUFFER_HEIGHT          (CONFIG_BSP_DISPLAY_LVGL_BUF_HEIGHT)
+#if CONFIG_BSP_DISPLAY_LVGL_PSRAM
+#define LVGL_BUFFER_MALLOC          (MALLOC_CAP_SPIRAM)
+#else
+#define LVGL_BUFFER_MALLOC          (MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT)
+#endif
 /* ENUMORATIONS --------------------------------------------------------------*/
 
 /* STRUCTURES & TYPEDEFS -----------------------------------------------------*/
