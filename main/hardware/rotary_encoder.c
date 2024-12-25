@@ -59,7 +59,7 @@ void encoder_handler_task(void *param)
 
 	const uint8_t pulse_offest = 50;
 
-	const uint8_t rotary_step = 4;
+	const uint8_t rotary_step = 2;
 
 	bool encoder_direction = 0;
 
@@ -127,18 +127,13 @@ void encoder_init(void* callback)
 
     };
 
-//    gpio_config_t knob_button_config = {
-//        .mode = GPIO_MODE_INPUT,
-//        .pin_bit_mask = 1ULL << KNOB_BUTTON
-//    };
-//    ESP_ERROR_CHECK(gpio_config(&knob_button_config));
-
-
     ESP_ERROR_CHECK(pcnt_new_unit(&unit_config, &pcnt_unit));
 
     ESP_LOGI(encoder, "set glitch filter");
-    pcnt_glitch_filter_config_t filter_config = {
-        .max_glitch_ns = 1000,
+    pcnt_glitch_filter_config_t filter_config = 
+    {
+        .max_glitch_ns = 500,
+        
     };
     ESP_ERROR_CHECK(pcnt_unit_set_glitch_filter(pcnt_unit, &filter_config));
 
@@ -150,7 +145,8 @@ void encoder_init(void* callback)
     };
     pcnt_channel_handle_t pcnt_chan_a = NULL;
     ESP_ERROR_CHECK(pcnt_new_channel(pcnt_unit, &chan_a_config, &pcnt_chan_a));
-    pcnt_chan_config_t chan_b_config = {
+    pcnt_chan_config_t chan_b_config = 
+    {
         .edge_gpio_num = EXAMPLE_EC11_GPIO_B,
         .level_gpio_num = EXAMPLE_EC11_GPIO_A,
     };

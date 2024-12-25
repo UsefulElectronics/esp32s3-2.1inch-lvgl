@@ -198,7 +198,7 @@ static void main_encoder_cb(uint32_t knobPosition)
 	switch (hLamp.control_mode) 
 	{
 		case 0:
-			hLamp.color.hue += temp_rotation_direction;
+			hLamp.color.hue += temp_rotation_direction * 2;
 			
 			hLamp.color.hue = fmax(0, fmin(360, hLamp.color.hue));
 			break;
