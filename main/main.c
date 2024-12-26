@@ -163,8 +163,9 @@ void lvgl_time_task(void* param)
 
         // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
         lv_timer_handler();
-//        //Used with smart watch
-//        _ui_arc_increment();
+		//WiFi connection check
+		ui_set_wifi_switch_state(wifi_is_connected());
+		;
 
         button_manager();
 

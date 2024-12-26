@@ -97,6 +97,8 @@ char* wifi_get_connection_ip(void);
  *     - Returns undefined behavior if the ESP32 is not connected.
  */
 int8_t wifi_get_rssi(void);
+
+bool wifi_is_connected(void);
 #endif /* MAIN_WIFI_CONNECT_H_ */
 
 
