@@ -24,6 +24,6 @@ The display shows the Wi-Fi and MQTT broker connection status, as well as the la
 We also measure the round display's current consumption using a Miniware variable power supply.
 
 The video provides a detailed explanation of the firmware running on the ESP32S3, including the hardware configuration, FreeRTOS tasks, and callbacks. 
-![Circuit Diagram](https://github.com/UsefulElectronics/esp32s3-gc9a01-lvgl/blob/main/circuit%20diagram/cover1.png)
+![Circuit Diagram](https://github.com/UsefulElectronics/esp32s3-2.1inch-lvgl/blob/main/circuit%20diagram/ESP32%20Round%20Display%20Lamp%20Control%20Over%20MQTT.png)
 ***
 
