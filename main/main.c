@@ -21,9 +21,8 @@
 #include "esp_interrupt.h"
 
 #include "hardware/rotary_encoder.h"
-#include "hardware/hlk-ld1125h.h"
 #include "hardware/button.h"
-#include "hardware/hlk-ld1125h.h"
+
 
 #include "display/display.h"
 
@@ -106,16 +105,11 @@ static void main_lamp_param_update(void);
  */
 void app_main(void)
 {
-
-	//gc9a01_displayInit();
-
 	displayConfig();
 	
 	main_lamp_init();
 	
 	systimer_init();
-
-	//uart_config();
 
 	gpio_config_ext_interrupt(KNOB_BUTTON, GPIO_INTR_NEGEDGE, gpio_isr_handle);
 
@@ -132,10 +126,7 @@ void app_main(void)
 
     xTaskCreatePinnedToCore(lvgl_time_task, "lvgl_time_task", 10000, NULL, 4, NULL, 1);
 
-     //Wait for WiFi and MQTT broker connection to be established.
-//     vTaskDelay(pdMS_TO_TICKS(15000));
-
-//     sntp_config();
+   //Wait for WiFi and MQTT broker connection to be established.
 
  	vTaskDelay(pdMS_TO_TICKS(15000));
 	
@@ -165,12 +156,10 @@ void lvgl_time_task(void* param)
         lv_timer_handler();
 		//WiFi connection check
 		ui_set_wifi_switch_state(wifi_is_connected());
-		;
 
         button_manager();
 
         // raise the task priority of LVGL and/or reduce the handler period can improve the performance
-
         vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(10) );
 
 	}
