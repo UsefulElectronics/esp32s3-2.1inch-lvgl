@@ -4,7 +4,7 @@
 # Sponsors
 
 ### JLCPCB
-Tutorial Sponsor JLCPCB Website. Get JLCPCB 6-layer PCBs for just $5! Register to get $80 Coupons link below:
+Tutorial Sponsor JLCPCB Website. Get JLCPCB 6-layer PCBs for just $2! Register to get $60 Coupons link below:
 https://jlcpcb.com/?from=ues
 
 ### VIEWE
